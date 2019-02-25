@@ -91,14 +91,19 @@ public class MainActivity extends AppCompatActivity {
         webview.loadUrl("https://0.facebook.com");
     }
 
-    public void afterPageFinish(){
+    public void afterPageFinish() {
         Switch notifications = findViewById(R.id.switch1);
         TextView nottext = findViewById(R.id.textView2);
         TextView logtext = findViewById(R.id.textView);
         String HtmlText = logtext.getText().toString();
+        final WebView webview = findViewById(R.id.webview);
 
-        if (HtmlText.contains("Μηνύματα")){
-            if (counter < 2)
+        if (HtmlText.contains("δεν είναι διαθέσιμο")){
+            logtext.setText("Το 0.facebook δεν είναι διαθέσιμο στο δίκτυο σας");
+            logtext.setVisibility(View.VISIBLE);
+        } else if (HtmlText.contains("Μηνύματα")){
+            webview.setVisibility(View.INVISIBLE);
+            if (counter < 2 && notifications_state)
                 counter++;
             logtext.setText("You are logged in");
             logtext.setVisibility(View.VISIBLE);
@@ -115,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             logtext.setText("You have to login");
             logtext.setVisibility(View.VISIBLE);
+            webview.setVisibility(View.VISIBLE);
         }
     }
 
