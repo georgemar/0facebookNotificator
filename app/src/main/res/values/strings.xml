@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MessengerNotificator</string>
+    <string name="reminder">First you ll have to login</string>
+    <string name="notifications">Sent notifications</string>
+    <string name="have_one">You have a notification</string>
+</resources>
+
