@@ -21,20 +21,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //creates the notification channel (lol)
         createNotificationChannel();
+
+        //getting the first html code to analyze if logged in or not
         getHtml();
 
-        final Switch notifications = findViewById(R.id.switch1);
+        //setting up the switch listener to toggle notifications
+        final Switch notifications = findViewById(R.id.not_switch);
         notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 notifications_state = isChecked;
             }
         });
 
+        //every 10 seconds the page will reload if the user wants notifications to detect new messages
         final Handler handler = new Handler();
-        final int delay = 10000; //milliseconds
-
-
+        final int delay = 10000; //milliseconds (1 sec = 1000 ms)
         handler.postDelayed(new Runnable(){
             public void run(){
                 if (notifications_state) {
@@ -43,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
-
     }
 
     private void createNotificationChannel() {
@@ -76,10 +78,12 @@ public class MainActivity extends AppCompatActivity {
         final WebView webview = findViewById(R.id.webview);
         Handler mHandler = new Handler();
 
+        //enables js so the program can extract the html using js
         webview.getSettings().setJavaScriptEnabled(true);
 
         webview.addJavascriptInterface(new MyJavaScriptInterface(mHandler), "HtmlViewer");
 
+        //after loading the page it extracts the html
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -87,15 +91,13 @@ public class MainActivity extends AppCompatActivity {
                         "('&lt;html&gt;'+document.getElementsByTagName('html')[0].innerHTML+'&lt;/html&gt;');");
             }
         });
-
         webview.loadUrl("https://0.facebook.com");
     }
 
-    public void afterPageFinish() {
-        Switch notifications = findViewById(R.id.switch1);
-        TextView nottext = findViewById(R.id.textView2);
-        TextView logtext = findViewById(R.id.textView);
-        String HtmlText = logtext.getText().toString();
+    public void afterPageFinish(String HtmlText) {
+        Switch notifications = findViewById(R.id.not_switch);
+        TextView nottext = findViewById(R.id.not_txt);
+        TextView logtext = findViewById(R.id.loggin_txt);
         final WebView webview = findViewById(R.id.webview);
 
         if (HtmlText.contains("δεν είναι διαθέσιμο")){
@@ -128,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
         private Handler mHandler;
         MyJavaScriptInterface(Handler mHandler) {
             this.mHandler = mHandler;
-
         }
 
         @JavascriptInterface
@@ -139,10 +140,7 @@ public class MainActivity extends AppCompatActivity {
                @Override
                public void run()
                {
-                   TextView text = findViewById(R.id.textView);
-                   text.setVisibility(View.INVISIBLE);
-                   text.setText(html_);
-                   afterPageFinish();
+                   afterPageFinish(html_);
                }
            });
         }

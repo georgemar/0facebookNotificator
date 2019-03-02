@@ -11,62 +11,42 @@
         android:layout_width="386dp"
         android:layout_height="426dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="64dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/loggin_txt"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webview" />
+        tools:layout_editor_absoluteX="206dp"
+        tools:layout_editor_absoluteY="515dp" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/not_switch"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:text="@string/notifications"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webview"
-        app:layout_constraintVertical_bias="0.767" />
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="654dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/not_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/have_one"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/switch1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/webview" />
+        tools:layout_editor_absoluteX="133dp"
+        tools:layout_editor_absoluteY="562dp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/app_name"
         android:layout_width="165dp"
         android:layout_height="35dp"
-        android:text="0.facebook Notificator"
+        android:text="@string/app_name"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/webview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="14dp" />
 
 </android.support.constraint.ConstraintLayout>
