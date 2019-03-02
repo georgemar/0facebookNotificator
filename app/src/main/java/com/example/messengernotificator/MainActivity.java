@@ -20,12 +20,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final WebView webview = findViewById(R.id.webview);
 
         //creates the notification channel (lol)
         createNotificationChannel();
 
+
+        setWebViewProperties();
         //getting the first html code to analyze if logged in or not
-        getHtml();
+        webview.loadUrl("https://0.facebook.com");
 
         //setting up the switch listener to toggle notifications
         final Switch notifications = findViewById(R.id.not_switch);
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable(){
             public void run(){
                 if (notifications_state) {
-                    getHtml();
+                    webview.loadUrl("https://0.facebook.com");
                 }
                 handler.postDelayed(this, delay);
             }
@@ -74,13 +77,14 @@ public class MainActivity extends AppCompatActivity {
         notificationManager.notify(6476, builder.build());
     }
 
-    public void getHtml(){
+    public void setWebViewProperties(){
         final WebView webview = findViewById(R.id.webview);
         Handler mHandler = new Handler();
 
         //enables js so the program can extract the html using js
         webview.getSettings().setJavaScriptEnabled(true);
 
+        //initialize js interface to call java methods through js
         webview.addJavascriptInterface(new MyJavaScriptInterface(mHandler), "HtmlViewer");
 
         //after loading the page it extracts the html
@@ -91,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                         "('&lt;html&gt;'+document.getElementsByTagName('html')[0].innerHTML+'&lt;/html&gt;');");
             }
         });
-        webview.loadUrl("https://0.facebook.com");
     }
 
     public void afterPageFinish(String HtmlText) {
